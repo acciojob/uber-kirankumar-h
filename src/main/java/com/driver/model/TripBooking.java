@@ -100,14 +100,12 @@ public class TripBooking{
     public TripBooking(){
 
     }
-    public TripBooking(int tripBookingId, String from_Location, String to_Location, int distanceInKm, TripStatus status, int bill, Customer customer, Driver driver) {
+    public TripBooking(int tripBookingId, String from_Location, String to_Location, int distanceInKm, TripStatus status, int bill) {
         this.tripBookingId = tripBookingId;
         this.from_Location = from_Location;
         this.to_Location = to_Location;
         this.distanceInKm = distanceInKm;
         this.status = status;
         this.bill = bill;
-        this.customer = customer;
-        this.driver = driver;
     }
 }

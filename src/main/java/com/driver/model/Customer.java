@@ -27,11 +27,10 @@ public class Customer{
 
     }
 
-    public Customer(int cutomerId, String mobNo, String password, List<TripBooking> tripBookingList) {
+    public Customer(int cutomerId, String mobNo, String password) {
         this.cutomerId = cutomerId;
         this.mobNo = mobNo;
         this.password = password;
-        this.tripBookingList = tripBookingList;
     }
 
     public int getCutomerId() {

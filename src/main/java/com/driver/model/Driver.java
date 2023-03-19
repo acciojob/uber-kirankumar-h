@@ -27,15 +27,12 @@ public class Driver{
     List<TripBooking> tripBookingList = new ArrayList<>();
 
     public Driver(){
-
     }
 
-    public Driver(int driverId, String mobNo, String password, Cab cab, List<TripBooking> tripBookingList) {
+    public Driver(int driverId, String mobNo, String password) {
         this.driverId = driverId;
         this.mobNo = mobNo;
         this.password = password;
-        this.cab = cab;
-        this.tripBookingList = tripBookingList;
     }
 
     public int getDriverId() {

@@ -28,11 +28,11 @@ public class Cab{
 
     }
 
-    public Cab(int cabId, int perKMRate, boolean isAvailable, Driver driver) {
+    public Cab(int cabId, int perKMRate, boolean isAvailable) {
         this.cabId = cabId;
         this.perKMRate = perKMRate;
         this.isAvailable = isAvailable;
-        this.driver = driver;
+
     }
 
     public int getCabId() {
