@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -25,8 +22,18 @@ public class TripBooking{
 
     private String to_Location;
 
+    private int distanceInKm;
+
     private TripStatus status;
 
     private int bill;
+
+    @ManyToOne
+    @JoinColumn
+    Customer customer;
+
+    @ManyToOne
+    @JoinColumn
+    Driver driver;
 
 }
