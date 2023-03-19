@@ -41,13 +41,13 @@ public class CustomerServiceImpl implements CustomerService {
 		//Avoid using SQL query
 		List<Driver> driverList = driverRepository2.findAll();
 
-		Cab cab = null;
+		// Cab cab = null;
 		Driver driver = null;
 		for(Driver driver1 : driverList){
-		    if(	driver1.getCab().isAvailable()){
-				driver = driver1;
-				driver.getCab().setAvailable(false);
-				break;
+		    if(	driver1.getCab().isAvailable() == Boolean.TRUE){
+				if((driver == null) || (driver.getDriverId() > driver1.getDriverId())){
+					driver = driver1;
+				}
 			}
 		}
       if (driver ==null) throw new Exception("No cab available!");
@@ -56,24 +56,27 @@ public class CustomerServiceImpl implements CustomerService {
 
 	  Customer customer = customerRepository2.findById(customerId).get();
 
-	  int ratePKm = driver.getCab().getPerKMRate();
+	  // int ratePKm = driver.getCab().getPerKMRate();
 
-	  int bill = ratePKm * distanceInKm;
+	  // int bill = ratePKm * distanceInKm;
 
 	  tripBooking.setFrom_Location(fromLocation);
 	  tripBooking.setTo_Location(toLocation);
 	  tripBooking.setStatus(TripStatus.CONFIRMED);
-	  tripBooking.setBill(bill);
+	  // tripBooking.setBill(bill);
 	  tripBooking.setDistanceInKm(distanceInKm);
+	  driver.getCab().setAvailable(Boolean.FALSE);
 
        tripBooking.setCustomer(customer);
 	   tripBooking.setDriver(driver);
 
-	   driver.getTripBookingList().add(tripBooking);
-	   customer.getTripBookingList().add(tripBooking);
 
-	   driverRepository2.save(driver);
-	   customerRepository2.save(customer);
+	   customer.getTripBookingList().add(tripBooking);
+		customerRepository2.save(customer);
+
+		driver.getTripBookingList().add(tripBooking);
+		driverRepository2.save(driver);
+
 
 	   return tripBooking;
 	}
@@ -85,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	   tripBooking.setStatus(TripStatus.CANCELED);
 	   tripBooking.setBill(0);
-
+	   tripBooking.getDriver().getCab().setAvailable(Boolean.TRUE);
 	   tripBookingRepository2.save(tripBooking);
 	}
 
@@ -94,7 +97,11 @@ public class CustomerServiceImpl implements CustomerService {
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
 		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
 
+		int bill = tripBooking.getDriver().getCab().getPerKMRate() * tripBooking.getDistanceInKm();
+
 		tripBooking.setStatus(TripStatus.COMPLETED);
+		tripBooking.setBill(bill);
+		tripBooking.getDriver().getCab().setAvailable(Boolean.TRUE);
 		tripBookingRepository2.save(tripBooking);
 	}
 }

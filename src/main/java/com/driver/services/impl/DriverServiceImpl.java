@@ -31,7 +31,7 @@ public class DriverServiceImpl implements DriverService {
         cab.setAvailable(true);
 		cab.setPerKMRate(10);
 		cab.setDriver(driver);
-
+        driver.setCab(cab);
        driverRepository3.save(driver);
 
 	}
@@ -49,7 +49,9 @@ public class DriverServiceImpl implements DriverService {
 		//Set the status of respective car to unavailable
        Driver driver = driverRepository3.findById(driverId).get();
 
+	   Cab cab = driver.getCab();
 	   driver.getCab().setAvailable(false);
-	   driverRepository3.save(driver);
+	   //driverRepository3.save(driver);
+		cabRepository3.save(cab);
 	}
 }
