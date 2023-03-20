@@ -1,67 +1,28 @@
 package com.driver.model;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Getter;
-//import lombok.NoArgsConstructor;
-//import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Customer{
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cutomerId;
-
-    private String mobNo;
-
+    private int customerId;
+    private String mobile;
     private String password;
 
-    @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
-    List<TripBooking> tripBookingList = new ArrayList<>();
+    //Mapping Customer-TripBooking
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<TripBooking> tripBookingList = new ArrayList<>();
 
-    public Customer(){
-
-    }
-
-    public Customer(int cutomerId, String mobNo, String password) {
-        this.cutomerId = cutomerId;
-        this.mobNo = mobNo;
-        this.password = password;
-    }
-
-    public int getCutomerId() {
-        return cutomerId;
-    }
-
-    public void setCutomerId(int cutomerId) {
-        this.cutomerId = cutomerId;
-    }
-
-    public String getMobNo() {
-        return mobNo;
-    }
-
-    public void setMobNo(String mobNo) {
-        this.mobNo = mobNo;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<TripBooking> getTripBookingList() {
-        return tripBookingList;
-    }
-
-    public void setTripBookingList(List<TripBooking> tripBookingList) {
-        this.tripBookingList = tripBookingList;
-    }
 }

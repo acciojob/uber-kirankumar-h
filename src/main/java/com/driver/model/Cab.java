@@ -1,69 +1,30 @@
 package com.driver.model;
 
-//import com.fasterxml.jackson.annotation.JsonAnyGetter;
-//import lombok.AllArgsConstructor;
-//import lombok.Getter;
-//import lombok.NoArgsConstructor;
-//import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-public class Cab{
-
-    @Id
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Cab {
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cabId;
+    private int Id;
+    private int perKmRate;
+    private boolean available;
 
-    private int perKMRate;
-
-    private boolean isAvailable;
-
+    //Mapping Cab-Driver
     @OneToOne
     @JoinColumn
-    Driver driver;
+    private Driver driver;
 
-
-    public Cab(){
-
-    }
-
-    public Cab(int cabId, int perKMRate, boolean isAvailable) {
-        this.cabId = cabId;
-        this.perKMRate = perKMRate;
-        this.isAvailable = isAvailable;
-
-    }
-
-    public int getCabId() {
-        return cabId;
-    }
-
-    public void setCabId(int cabId) {
-        this.cabId = cabId;
-    }
-
-    public int getPerKMRate() {
-        return perKMRate;
-    }
-
-    public void setPerKMRate(int perKMRate) {
-        this.perKMRate = perKMRate;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public boolean getAvailable() {
+        return available;
     }
 }
